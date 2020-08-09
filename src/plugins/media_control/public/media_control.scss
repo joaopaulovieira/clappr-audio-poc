@@ -1,0 +1,30 @@
+.media-control[data-media-control] {
+    width: 64%;
+    height: 76px;
+    position: absolute;
+    z-index: 1;
+    bottom: 23px;
+    color: white;
+
+    .media-control__timers-container {
+      height: 14px;
+      background-color: red;
+      line-height: 1;
+    }
+
+    .media-control__seekbar-container {
+      height: 18px;
+      background-color: black;
+      line-height: 1.3;
+    }
+
+    .media-control__buttons-container {
+      height: 44px;
+    }
+  }
+
+  .play-pause-button {
+    width: 44px;
+    height: 44px;
+    line-height: 3 !important;
+  }

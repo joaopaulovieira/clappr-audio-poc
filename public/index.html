@@ -16,12 +16,10 @@
       <div class="sidebar">
         <div id="editor">var playerElement = document.getElementById("player-wrapper");
 
-var player = new Clappr.Player({
-  source: 'http://clappr.io/highline.mp4',
-  poster: 'http://clappr.io/poster.png',
-  playback: { controls: true },
-  plugins: [SkeletonPlugin],
-  SkeletonOptions: {}
+var player = new ClapprAudioPlayer.Player({
+  source: 'https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_5MG.mp3',
+  width: 640,
+  height: 230,
 });
 
 player.attachTo(playerElement);
