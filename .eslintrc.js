@@ -1,6 +1,6 @@
 module.exports = {
   'env': { jest: true },
-  'globals': { jest: true, window: true , document: true, Event: true, console: true, Clappr: true, $: true, require: true, process: true, __dirname: true, module: true },
+  'globals': { jest: true, window: true , document: true, Event: true, console: true, ClapprAudioPlayer: true, $: true, require: true, process: true, __dirname: true, module: true },
   'extends': ['eslint:recommended'],
   'parserOptions': { 'sourceType': 'module', 'ecmaVersion': 2018, },
   'rules': {

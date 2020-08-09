@@ -21,7 +21,7 @@ var urlParams;
 */
 var Parser = function(output) {
     this.output = output
-    this.console = $('#console')
+    this.console = document.getElementById('#console')
     this.context = document
 }
 
@@ -39,18 +39,16 @@ Parser.prototype = {
     }
 }
 
-$(document).ready(function() {
-    var parser = new Parser($('#output'))
-    $('.run').click(function() {
-        var code = ace.edit('editor').getSession().getValue()
-        parser.parse(code)
-    })
-})
-
 /*
   Editor
 */
 window.onload = function() {
+    var parser = new Parser(document.getElementById('output'))
+    document.querySelector('.run').click(function() {
+        var code = ace.edit('editor').getSession().getValue()
+        parser.parse(code)
+    })
+
     var editor = ace.edit('editor')
     var session = editor.getSession()
 

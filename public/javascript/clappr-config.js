@@ -1,9 +1,8 @@
-// const playerElement = document.getElementById('player-wrapper')
+const playerElement = document.getElementById('player-wrapper')
 
-// const player = new Clappr.Player({
-//   source: 'http://clappr.io/highline.mp4',
-//   poster: 'http://clappr.io/poster.png',
-//   playback: { controls: true },
-// })
+const player = new ClapprAudioPlayer.Player({
+  source: 'https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_5MG.mp3',
+  playback: { controls: true },
+})
 
-// player.attachTo(playerElement)
+player.attachTo(playerElement)

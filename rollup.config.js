@@ -28,19 +28,16 @@ const plugins = [
 
 const mainBundle = {
   input: 'src/main.js',
-  external: ['@clappr/core'],
   output: [
     {
       name: 'ClapprAudioPlayer',
       file: pkg.main,
       format: 'umd',
-      globals: { '@clappr/core': 'Clappr' },
     },
     minimize && {
       name: 'ClapprAudioPlayer',
       file: 'dist/clappr-audio-poc.min.js',
       format: 'umd',
-      globals: { '@clappr/core': 'Clappr' },
       plugins: terser(),
     },
   ],
@@ -49,12 +46,10 @@ const mainBundle = {
 
 const esmBundle = {
   input: 'src/main.js',
-  external: ['@clappr/core', /@babel\/runtime/],
   output: {
     name: 'ClapprAudioPlayer',
     file: pkg.module,
     format: 'esm',
-    globals: { '@clappr/core': 'Clappr' },
   },
   plugins,
 }
