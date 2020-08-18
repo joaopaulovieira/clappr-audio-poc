@@ -20,21 +20,21 @@ var urlParams;
   Parser
 */
 var Parser = function(output) {
+    this.playerWrapper = document.getElementById('player-wrapper')
     this.output = output
-    this.console = document.getElementById('#console')
+    this.console = document.getElementById('console')
     this.context = document
 }
 
 Parser.prototype = {
     parse: function(code) {
         try {
-            var old = player
+            player.stopListening()
+            while (this.playerWrapper.firstChild) this.playerWrapper.removeChild(this.playerWrapper.firstChild)
             eval(code)
-            old.destroy()
-            window.player = player
-            this.console.empty()
+            this.console.innerHTML = ''
         } catch (err) {
-            this.console.html(err.message)
+            this.console.innerText = err.message
         }
     }
 }
@@ -44,7 +44,7 @@ Parser.prototype = {
 */
 window.onload = function() {
     var parser = new Parser(document.getElementById('output'))
-    document.querySelector('.run').click(function() {
+    document.querySelector('.run').addEventListener('click', () => {
         var code = ace.edit('editor').getSession().getValue()
         parser.parse(code)
     })
