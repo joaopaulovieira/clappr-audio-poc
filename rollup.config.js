@@ -1,6 +1,7 @@
 import babel from '@rollup/plugin-babel'
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
+import image from '@rollup/plugin-image'
 import html from 'rollup-plugin-html'
 import postcss from 'rollup-plugin-postcss'
 import livereload from 'rollup-plugin-livereload'
@@ -30,6 +31,7 @@ const plugins = [
   babel({ exclude: 'node_modules/**', babelHelpers: 'bundled' }),
   html(),
   postcss(postcssOptions),
+  image(),
   size(),
   filesize(),
   dev && serve({ contentBase: ['dist', 'public'], host: '0.0.0.0', port: '8080' }),
@@ -65,4 +67,4 @@ const esmBundle = {
   plugins,
 }
 
-export default [mainBundle, esmBundle]
+export default [mainBundle]
