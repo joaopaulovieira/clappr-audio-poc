@@ -9,6 +9,13 @@ const player = new ClapprAudioPlayer.Player({
     title: 'GE Flamengo #74 com Rodrigo Caio - Expectativa alta após primeiro contato com Dome: "Estamos dispostos a aprender"',
     alt: 'GE Flamengo #74 com Rodrigo Caio - Expectativa alta após primeiro contato com Dome: "Estamos dispostos a aprender"',
   },
+  mediaInfo: {
+    header: 'GE Flamengo',
+    title: 'GE Flamengo #74 com Rodrigo Caio - Expectativa alta após primeiro contato com Dome: "Estamos dispostos a aprender"',
+    productName: 'Globo Esporte',
+    productColor: 'rgb(168, 0, 0)',
+    dateTime: '05/08/2020 18:43',
+  },
 })
 
 player.attachTo(playerElement)

@@ -12,6 +12,7 @@ module.exports = {
     process: true,
     __dirname: true,
     module: true,
+    Intl: true,
   },
   extends: ['eslint:recommended'],
   parserOptions: { sourceType: 'module', ecmaVersion: 2018 },
