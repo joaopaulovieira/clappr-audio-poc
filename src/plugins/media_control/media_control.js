@@ -1,5 +1,10 @@
 import { Events, UICorePlugin, template, version } from '@clappr/core'
 
+import playIcon from './public/icons/play_icon.svg'
+import pauseIcon from './public/icons/pause_icon.svg'
+import rewindIcon from './public/icons/rewind_icon.svg'
+import fastForwardIcon from './public/icons/fast_forward_icon.svg'
+
 import './public/media_control.scss'
 import mediaControlHTML from './public/media_control.html'
 
@@ -25,6 +30,8 @@ export default class MediaControlPlugin extends UICorePlugin {
     return {
       'click .play-pause-button[data-play-button]': 'play',
       'click .play-pause-button[data-pause-button]': 'pause',
+      'click .rewind-button': 'rewind',
+      'click .fast-forward-button': 'fastForward',
     }
   }
 
@@ -42,9 +49,13 @@ export default class MediaControlPlugin extends UICorePlugin {
 
   onActiveContainerChanged() {
     this.bindEvents()
-    this.changeTogglePlay()
+    this.setInitialState()
     this.bindContainerEvents()
     this.trigger(Events.MEDIACONTROL_CONTAINERCHANGED)
+  }
+
+  setInitialState() {
+    this.changeTogglePlay()
   }
 
   play() {
@@ -55,17 +66,23 @@ export default class MediaControlPlugin extends UICorePlugin {
     this.container && this.container.pause()
   }
 
+  rewind() {
+    this.core.activePlayback && this.core.activePlayback.seek(this.core.activePlayback.getCurrentTime() - 10)
+  }
+
+  fastForward() {
+    this.core.activePlayback && this.core.activePlayback.seek(this.core.activePlayback.getCurrentTime() + 10)
+  }
+
   changeTogglePlay() {
     this.$playPauseToggle.innerHTML = ''
     if (this.container && this.container.isPlaying()) {
-      this.$playPauseToggle.style.backgroundColor = 'blue'
-      this.$playPauseToggle.innerHTML = 'pause'
+      this.$playPauseToggle.appendChild(pauseIcon)
       this.$playPauseToggle.setAttribute('data-pause-button', '')
       this.$playPauseToggle.removeAttribute('data-play-button')
       this.trigger(Events.MEDIACONTROL_PLAYING)
     } else {
-      this.$playPauseToggle.style.backgroundColor = 'green'
-      this.$playPauseToggle.innerHTML = 'play'
+      this.$playPauseToggle.appendChild(playIcon)
       this.$playPauseToggle.setAttribute('data-play-button', '')
       this.$playPauseToggle.removeAttribute('data-pause-button')
       this.trigger(Events.MEDIACONTROL_NOTPLAYING)
@@ -74,14 +91,31 @@ export default class MediaControlPlugin extends UICorePlugin {
 
   togglePlayPause() {
     this.container.isPlaying() ? this.container.pause() : this.container.play()
-    return false
+  }
+
+  destroy() {
+    this.isRendered = false
+    super.destroy()
+  }
+
+  cacheElements() {
+    this.$buttonsContainer = this.el.querySelector('.media-control__buttons-container')
+    this.$playPauseToggle = this.$buttonsContainer.querySelector('.play-pause-button')
+    this.$rewindButton = this.$buttonsContainer.querySelector('.rewind-button')
+    this.$fasForwardButton = this.$buttonsContainer.querySelector('.fast-forward-button')
+
+    this.$rewindButton.appendChild(rewindIcon)
+    this.$fasForwardButton.appendChild(fastForwardIcon)
+
+    this.isRendered = true
   }
 
   render() {
+    if (this.isRendered) return
+
     this.$el.html(this.template())
-    this.$buttonsContainer = this.el.querySelector('.media-control__buttons-container')
-    this.$playPauseToggle = this.$buttonsContainer.querySelector('.play-pause-button')
-    this.changeTogglePlay()
+    this.cacheElements()
+    this.setInitialState()
     this.core.$el.append(this.el)
   }
 }

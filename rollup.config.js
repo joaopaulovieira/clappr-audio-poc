@@ -18,20 +18,22 @@ const minimize = !!process.env.MINIMIZE
 
 const postcssOptions = {
   use: [
-    ['sass', {
-      includePaths: [
-        'node_modules/@clappr/core/src/base/scss',
-        'src/scss',
-      ]
-    }]
-  ]
+    [
+      'sass', {
+        includePaths: [
+          'node_modules/@clappr/core/src/base/scss',
+          'src/scss',
+        ],
+      },
+    ],
+  ],
 }
 
 const plugins = [
+  image({ dom: true }),
   babel({ exclude: 'node_modules/**', babelHelpers: 'bundled' }),
   html(),
   postcss(postcssOptions),
-  image(),
   size(),
   filesize(),
   dev && serve({ contentBase: ['dist', 'public'], host: '0.0.0.0', port: '8080' }),

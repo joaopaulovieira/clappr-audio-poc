@@ -17,19 +17,28 @@ export default class PosterPlugin extends UIContainerPlugin {
 
   constructor(container) {
     super(container)
-    this.source = this.options.poster && this.options.poster.source || placeholderImage
+    this.source = this.options.poster && this.options.poster.source
     this.title = this.options.poster && this.options.poster.title || ''
     this.alt = this.options.poster && this.options.poster.alt || this.title || ''
     this.render()
   }
 
-  render() {
-    const posterImage = document.createElement('img')
-    posterImage.src = this.source
+  setImage() {
+    let posterImage = placeholderImage
+
+    if (this.source) {
+      posterImage = document.createElement('img')
+      posterImage.src = this.source
+    }
+
     posterImage.title = this.title
     posterImage.alt = this.alt
 
     this.el.append(posterImage)
+  }
+
+  render() {
+    this.setImage()
     this.container.$el.append(this.el)
   }
 }

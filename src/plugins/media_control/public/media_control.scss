@@ -19,12 +19,21 @@
     }
 
     .media-control__buttons-container {
+      display: flex;
       height: 44px;
     }
   }
 
-  .play-pause-button {
+  .button {
+    display: flex !important;
+    line-height: 3 !important;
+
+    justify-content: center;
+    align-items: center;
     width: 44px;
     height: 44px;
-    line-height: 3 !important;
+  }
+
+  .play-pause-button {
+    margin-left: -14px !important;
   }
