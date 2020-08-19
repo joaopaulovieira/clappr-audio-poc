@@ -1,4 +1,4 @@
-import { Events, UICorePlugin, template, version } from '@clappr/core'
+import { Events, UICorePlugin, Utils, template, version } from '@clappr/core'
 
 import playIcon from './public/icons/play_icon.svg'
 import pauseIcon from './public/icons/pause_icon.svg'
@@ -45,6 +45,7 @@ export default class MediaControlPlugin extends UICorePlugin {
     if (!this.container) return
     this.listenTo(this.container, Events.CONTAINER_PLAY, this.changeTogglePlay)
     this.listenTo(this.container, Events.CONTAINER_PAUSE, this.changeTogglePlay)
+    this.listenTo(this.container, Events.CONTAINER_TIMEUPDATE, this.onTimeUpdate)
   }
 
   onActiveContainerChanged() {
@@ -64,6 +65,27 @@ export default class MediaControlPlugin extends UICorePlugin {
 
   pause() {
     this.container && this.container.pause()
+  }
+
+  onTimeUpdate(timeProgress) {
+    this.currentPositionValue = timeProgress.current < 0 ? timeProgress.total : timeProgress.current
+
+    if (this.currentDurationValue !== timeProgress.total) {
+      this.currentDurationValue = timeProgress.total
+      this.updateDuration()
+    }
+
+    this.updatePosition()
+  }
+
+  updatePosition() {
+    const formattedCurrentPosition = Utils.formatTime(this.currentPositionValue)
+    this.$position.innerText = formattedCurrentPosition
+  }
+
+  updateDuration() {
+    const formattedTime = Utils.formatTime(this.currentDurationValue)
+    this.$duration.innerText = formattedTime
   }
 
   rewind() {
@@ -100,6 +122,14 @@ export default class MediaControlPlugin extends UICorePlugin {
 
   cacheElements() {
     this.$buttonsContainer = this.el.querySelector('.media-control__buttons-container')
+    this.$timersContainer = this.el.querySelector('.media-control__timers-container')
+
+    this.$position = this.$timersContainer.querySelector('.position')
+    this.$duration = this.$timersContainer.querySelector('.duration')
+
+    this.$position.innerText = '00:00'
+    this.$duration.innerText = '00:00'
+
     this.$playPauseToggle = this.$buttonsContainer.querySelector('.play-pause-button')
     this.$rewindButton = this.$buttonsContainer.querySelector('.rewind-button')
     this.$fasForwardButton = this.$buttonsContainer.querySelector('.fast-forward-button')
