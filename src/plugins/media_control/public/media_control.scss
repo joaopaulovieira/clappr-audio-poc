@@ -14,13 +14,82 @@
 
     .media-control__seekbar-container {
       height: 18px;
-      background-color: red;
       line-height: 1.3;
+
+      &:hover {
+        .media-control__seekbar-background, .media-control__seekbar-hover {
+          opacity: 1;
+        }
+      }
+    }
+
+    .media-control__seekbar-background {
+      width: 100%;
+      height: 3px;
+      position: relative;
+      top: 12px;
+      background: rgba(0,0,0,0.1);
+    }
+  
+    .media-control__seekbar-fill-1 {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background-color: rgba(0,0,0,0.3);
+      transition: all 0.1s ease-out;
+    }
+    
+    .media-control__seekbar-fill-2 {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background-color: rgb(168, 0, 0);
+      transition: all 0.1s ease-out;
+    }
+
+    .media-control__seekbar-hover {
+      opacity: 0;
+      position: absolute;
+      top: -3px;
+      width: 5px;
+      height: 7px;
+      background-color: black;
+      transition: opacity 0.1s ease;
+    }
+    
+    .media-control__seekbar-scrubber {
+      position: absolute;
+      transform: translateX(-50%);
+      left: 0;
+      width: 20px;
+      height: 20px;
+      opacity: 1;
+      transition: all 0.1s ease-out;
+      top: 16px;
+    }
+
+    .media-control__seekbar-scrubber-icon {
+        position: absolute;
+        left: 6px;
+        top: 6px;
+        width: 50%;
+        height: 50%;
+        border-radius: 10px;
+        box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.2);
+        background-color: rgb(168, 0, 0);
     }
 
     .media-control__buttons-container {
       display: flex;
       height: 44px;
+    }
+
+    .media-control--no-transition {
+      transition: none !important;
     }
   }
 
