@@ -10,6 +10,7 @@
       height: 14px;
       color: #666;
       line-height: 1;
+      display: flex;
     }
 
     .media-control__seekbar-container {
@@ -108,9 +109,12 @@
   }
 
   .position {
-    float: left;
+    display: flex !important;
+    flex-basis: 50%;
   }
 
   .duration {
-    float: right;
+    display: flex !important;;
+    flex-basis: 50%;
+    justify-content: flex-end;
   }
