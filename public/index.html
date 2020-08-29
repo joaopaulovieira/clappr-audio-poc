@@ -17,9 +17,11 @@
         <div id="editor">var playerElement = document.getElementById("player-wrapper");
 
 var player = new ClapprAudioPlayer.Player({
-  source: 'https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_5MG.mp3',
+  source: 'https://bitmovin-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa-audio-only.m3u8',
   width: 640,
   height: 230,
+  autoPlay: true,
+  plugins: [HlsjsPlayback],
   poster: {
     source: 'https://estaticos.globoradio.globo.com/fotos/2020/08/4545a92d-bcd0-4284-b1a6-c3cd209ef33c.jpg.1400x1400_q90_box-341%2C0%2C1707%2C1363_crop_detail.jpg',
     title: 'GE Flamengo #74 com Rodrigo Caio - Expectativa alta após primeiro contato com Dome: "Estamos dispostos a aprender"',
@@ -44,6 +46,7 @@ player.attachTo(playerElement);
     <script type="text/javascript" charset="utf-8" src="javascript/main.js" async></script>
     <script type="text/javascript" charset="utf-8" src="javascript/editor/ace.js" async></script>
     <script type="text/javascript" charset="utf-8" src="clappr-audio-poc.js"></script>
+    <script type="text/javascript" charset="utf-8" src="https://cdn.jsdelivr.net/npm/@clappr/hlsjs-playback@latest/dist/hlsjs-playback.min.js" ></script>
     <script type="text/javascript" charset="utf-8" src="javascript/clappr-config.js" async></script>
   </body>
 </html>
